@@ -1,3 +1,3 @@
 <?php
 #Front Controller
-echo 'test github' ;
+echo $_SERVER['REQUEST_URI'] ;
