@@ -1,8 +1,14 @@
 <?php
-use App\Utilities\Lang;
-#initiall file
-require 'bootstrap/init.php' ;
-#Front Controller
 
-$a = "14000";
-echo Lang::persian_number($a) ;
+use App\Core\Router ;
+#INITALE FILE
+require 'bootstrap/init.php' ;
+
+
+
+#front conroller router
+$router = new Router() ;
+$router -> run() ;
+
+
+
