@@ -1,7 +1,6 @@
 <?php
-#AOUTOLOAD COMPOSER 
-require 'vendor/autoload.php' ;
+#initiall file
+require 'bootstrap/init.php' ;
 #Front Controller
-echo $_SERVER['REQUEST_URI'] ;
 
-new App\Core\Request() ;
+var_dump($_ENV['DB_NAME']) ;
