@@ -1,0 +1,24 @@
+{
+    "name": "mhm/microframework",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mhm\\Microframework\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hala company",
+            "email": "hadii.mohammadii1379@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    },
+
+    "autoload" : {
+        "psr-4": {"App\\" : "App/"}
+    }
+}
