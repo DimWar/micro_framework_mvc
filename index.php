@@ -1,14 +1,11 @@
 <?php
-
-use App\Core\Router ;
+use App\Core\Routing\Route ;
 #INITALE FILE
 require 'bootstrap/init.php' ;
 
 
 
-#front conroller router
-$router = new Router() ;
-$router -> run() ;
 
+ 
 
-
+dd(Route::routes());

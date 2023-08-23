@@ -10,3 +10,11 @@ function random_element(array $arr){
     shuffle($arr) ;
     return array_pop($arr) ;
 }
+
+#STANDARD PRINT
+function dd(string|array $message){
+    echo "<pre>" ;
+    print_r($message) ;
+    echo "</pre>" ;
+    die() ;
+}

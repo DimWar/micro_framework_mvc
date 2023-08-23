@@ -1,4 +1,6 @@
 <?php
+
+#برای مطالعه...........................................
 namespace App\Core ;
 use App\Utilities\Url ;
 
@@ -7,6 +9,7 @@ class Router{
     public function __construct()
     {
         $this->router = [
+            '/' => 'home/index.php' ,
             '/a/a' => 'colors/red.php' ,
             '/b/b' => 'colors/blue.php'  
         ];
