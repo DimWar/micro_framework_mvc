@@ -3,30 +3,19 @@
 use App\Core\Routing\Route ;
 
 
-
+#home
 Route::get('/','HomeController@index') ;
-Route::get('/archive','ArchiveController@index') ;
 
+#article 
+Route::get('/archive','ArchiveController@index') ;
+Route::get('/archive/products','ArchiveController@products') ;
+Route::get('/archive/articles','ArchiveController@articles') ;
+
+#examle
 // Route::get('/null',function(){
 //     echo "null get ...!" ;
-// }) ;
-
-// Route::get('/b',function(){
-//     echo "b..!" ;
-// }) ;
-
-// Route::get('/c',function(){
-//     echo "c..!" ;
-// }) ;
-
-// Route::get('/d',function(){
-//     echo "d..!" ;
 // }) ;
 
 // Route::put('/e',['controller','Method']) ;
 
 // Route::put('/f','controller@Method') ;
-
-Route::post('/a',function(){
-    echo "a..!" ;
-}) ;
