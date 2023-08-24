@@ -6,7 +6,7 @@ class Route {
 
     public static function add($methods , $uri ,$action = null)
     {
-        $methods = is_array($methods) ? $methods : ["$methods"] ; #asign methods to array
+        $methods = is_array($methods) ? $methods : [$methods] ; #asign methods to array
         self::$routes[] = ['methods' => $methods ,'uri' => $uri ,'action' => $action] ;
         
     }
@@ -37,7 +37,7 @@ class Route {
     
     public static function put($uri ,$action = null)
     {
-        self::add('put',$uri,$action) ;
+        self::add('put',$uri,$action = null) ;
     }
 
     public static function routes()
