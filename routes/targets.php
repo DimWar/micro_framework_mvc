@@ -11,6 +11,7 @@ Route::get('/archive','ArchiveController@index') ;
 Route::get('/archive/products','ArchiveController@products') ;
 Route::get('/archive/articles','ArchiveController@articles') ;
 
+Route::get('/users/list','UserController@list') ;
 #examle
 // Route::get('/null',function(){
 //     echo "null get ...!" ;

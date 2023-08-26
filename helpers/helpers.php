@@ -19,8 +19,9 @@ function dd(string|array $message){
     die() ;
 }
 
-function view($path) {
+function view($path,$data = []) {
     #'errors.404'
+    extract($data) ;
     $path = str_replace('.','/',$path) ;
     require $view_full_path = BASE_PATH . "views/$path.php";
 }
