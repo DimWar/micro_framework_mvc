@@ -7,9 +7,11 @@ class Request{
     private $agent ;
     private $ip ;
     private $uri ;
+    private $browsAgant;
 
     public function __construct()
     {
+        $this->browsAgant = $_SERVER['HTTP_USER_AGENT'];
         $this->method = strtolower($_SERVER['REQUEST_METHOD']) ;
         $this->ip = $_SERVER['REMOTE_ADDR'] ;
         $this->agent = $_SERVER['HTTP_USER_AGENT'] ;
