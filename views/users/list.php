@@ -8,14 +8,9 @@
 </head>
 <body>
     <ul>
-       
-      
-        <?php for($i =0 ; $i>=10 ; $i++): ?>
-         
-                <li><?= $list[$i] ?></li>
-               
-       
-        <?php endfor ; ?>
+    <?php foreach($list as $value): ?>
+        <li><?= $value ?></li>
+    <?php endforeach ; ?>
     </ul>
 </body>
 </html>
