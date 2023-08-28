@@ -5,8 +5,18 @@ use App\Core\Routing\Router;
 #INITALE FILE
 require 'bootstrap/init.php' ;
 
-// dd(Route::routes());
 
-$router =  new Router() ;
 
-$router->run() ;
+// $router =  new Router() ;
+// $router->run() ;
+
+#new get route / slug , regex 101
+$route = '/post/{slug}' ;
+
+$route_pattern = '/^\/post\/(?<slug>[-%\w]+)$/' ;
+$uri1 = '/post/what-is-user' ;
+$uri2 = '/post/what-is-ubuntu' ;
+
+$result = preg_match($route_pattern,$uri1,$matches) ;
+// nice_dd($result) ;
+nice_dd($matches) ;
