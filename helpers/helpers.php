@@ -48,3 +48,7 @@ function nice_dd($var)
     nice_dump($var);
     die();
 }
+
+function printHtmlSpecialChars($regex){
+    echo htmlspecialchars($regex) ;
+}

@@ -13,10 +13,13 @@ require 'bootstrap/init.php' ;
 #new get route / slug , regex 101
 $route = '/post/{slug}' ;
 
-$route_pattern = '/^\/post\/(?<slug>[-%\w]+)$/' ;
-$uri1 = '/post/what-is-user' ;
-$uri2 = '/post/what-is-ubuntu' ;
+$pattern = "/^" . str_replace(['/','{','}'],['\/','(?<','>[-%\w]+)'],$route) . "$/" ;
 
-$result = preg_match($route_pattern,$uri1,$matches) ;
-// nice_dd($result) ;
-nice_dd($matches) ;
+echo htmlspecialchars($pattern);
+
+// $route_pattern = '/^\/post\/(?<slug>[-%\w]+)$/' ;
+// $uri1 = '/post/what-is-user' ;
+// $uri2 = '/post/what-is-ubuntu' ;
+// $result = preg_match($route_pattern,$uri1,$matches) ;
+
+
