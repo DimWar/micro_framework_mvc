@@ -10,8 +10,7 @@ class Router{
     private $routes ;
     private $current_route ;
     const BASE_CONTROLLERS = 'App\Controllers\\' ;
-    public function __construct()
-    {
+    public function __construct(){
         $this->request = new Request();
         $this->routes = Route::routes();
         $this->current_route = $this->findRout($this->request) ?? null;
@@ -25,14 +24,16 @@ class Router{
             $middleware_obj = new $middleware_class ;
             $middleware_obj->handel(); 
         }
-
     }
 
-    public function findRout(Request $request)
-    {
+    public function findRout(Request $request){
         foreach($this->routes as $route){
-            if(in_array($request->method(),$route['methods']) && $request->uri() == $route['uri']){
-                return $route ;
+            nice_dump(!in_array($request->method(),$route['methods'])) ;
+            if(!in_array($request->method(),$route['methods'])){ // && $request->uri() == $route['uri']
+                return false ;
+            }
+            if ($this->regex_matched($route)) {
+                return true ;
             }
         }
         return null ;
@@ -55,6 +56,7 @@ class Router{
         $this->dispatch($this->current_route);
 
     }
+
     private function dispatch($route){
         $action = $route['action'] ?? null;
 
@@ -83,5 +85,20 @@ class Router{
             }
             $controller->$method() ;
         }
+    }
+
+    public function  regex_matched($route){
+        // nice_dump($route) ;
+        $pattern = "/^" . str_replace(['/','{','}'],['\/','(?<','>[-%\w]+)'],$route['uri']) . "$/" ;
+        $result = preg_match($pattern,$this->request->uri(),$matches) ;
+        
+        if (!$result) {
+            nice_dump('not matched') ;
+            // nice_dump($route) ;
+            return false ;
+        }
+        nice_dump('ikkkkk') ;
+        // nice_dump($route) ;
+        return true ;
     }
 } 

@@ -14,9 +14,8 @@ Route::get('/archive/articles','ArchiveController@articles') ;
 #users
 Route::get('/users/list','UserController@list',[BlockFirefox::class]) ;
 
-
-
-
+Route::get('/panel','PostController@single',Auth::class) ;
+Route::get('/post/{slug}','PostController@single') ;
 
 
 
