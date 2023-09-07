@@ -10,42 +10,44 @@ class Router{
     private $routes ;
     private $current_route ;
     const BASE_CONTROLLERS = 'App\Controllers\\' ;
+    #quantification privete varables
     public function __construct(){
         $this->request = new Request();
         $this->routes = Route::routes();
         $this->current_route = $this->findRout($this->request) ?? null;
         #run middleware
-        $this->run_route_middleware() ;
+        // $this->run_route_middleware() ;
     }
-    #MIDDLEWARE
-    private function run_route_middleware(){
-        $middleware = $this->current_route['middleware'] ;
-        foreach ($middleware as $middleware_class) {
-            $middleware_obj = new $middleware_class ;
-            $middleware_obj->handel(); 
-        }
-    }
-
+    #middleware
+    // private function run_route_middleware(){
+    //     $middleware = $this->current_route['middleware'] ;
+    //     die() ;
+    //     foreach ($middleware as $middleware_class) {
+    //         $middleware_obj = new $middleware_class ;
+    //         $middleware_obj->handel(); 
+    //     }
+    //     die() ;
+    // }
+    #find current route in routes
     public function findRout(Request $request){
         foreach($this->routes as $route){
-            nice_dump(!in_array($request->method(),$route['methods'])) ;
-            if(!in_array($request->method(),$route['methods'])){ // && $request->uri() == $route['uri']
-                return false ;
+            if(in_array($request->method(),$route['methods'])&& $request->uri() == $route['uri']){ // && $request->uri() == $route['uri']
+                return $route ;
             }
-            if ($this->regex_matched($route)) {
-                return true ;
-            }
+            // if ($this->regex_matched($route)) {
+            //     return true ;
+            // }
         }
         return null ;
     }
-
+    #error 404
     public function dispatch404(){
         #header 404
         header('HTTP/1.0 404 Not Found');
         view('errors.404') ;
         #include file 404
     } 
-
+    #router run
     public function run(){
         #405 : invalid request method
 
@@ -86,19 +88,16 @@ class Router{
             $controller->$method() ;
         }
     }
-
-    public function  regex_matched($route){
-        // nice_dump($route) ;
-        $pattern = "/^" . str_replace(['/','{','}'],['\/','(?<','>[-%\w]+)'],$route['uri']) . "$/" ;
-        $result = preg_match($pattern,$this->request->uri(),$matches) ;
+    #regex route for example / post/{slog} = > post/145
+    // public function  regex_matched($route){
+    //     // nice_dump($route) ;
+    //     $pattern = "/^" . str_replace(['/','{','}'],['\/','(?<','>[-%\w]+)'],$route['uri']) . "$/" ;
+    //     $result = preg_match($pattern,$this->request->uri(),$matches) ;
         
-        if (!$result) {
-            nice_dump('not matched') ;
-            // nice_dump($route) ;
-            return false ;
-        }
-        nice_dump('ikkkkk') ;
-        // nice_dump($route) ;
-        return true ;
-    }
+    //     if (!$result) {
+    //         nice_dump('not matched') ;
+    //         return false ;
+    //     }
+    //     return true ;
+    // }
 } 
