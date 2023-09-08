@@ -90,6 +90,7 @@ class Router{
     }
     #regex route for example / post/{slog} = > post/145
     public function  regex_matched($route){
+        global $request ;
         $pattern = "/^" . str_replace(['/','{','}'],['\/','(?<','>[-%\w]+)'],$route['uri']) . "$/" ;
         $result = preg_match($pattern,$this->request->uri(),$matches) ;
         if (!$result) {
@@ -98,7 +99,7 @@ class Router{
         #integer | staring
         foreach($matches as $key => $values){
             if (!is_integer($key)) {
-                echo $key . '=>' . $values ;
+                $request->add_route_param($key,$values);
             }
         }
         return true ;

@@ -3,6 +3,7 @@ namespace App\Core ;
 
 class Request{
     private $params ;
+    private $route_params ;
     private $method ;
     private $agent ;
     private $ip ;
@@ -33,6 +34,12 @@ class Request{
     }
     public function uri(){
         return $this->uri ;
+    }
+    public function add_route_param($key,$values){
+        $this->route_params[$key] = $values ;
+    }
+    public function get_route_param($key){
+        $this->route_params[$key] ;
     }
 
 }

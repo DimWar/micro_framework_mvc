@@ -4,6 +4,7 @@ namespace App\Controllers ;
 class PostController {
     public function single(){
         #model
-        nice_dd('helkooooo') ;
+        global $request ;
+        nice_dump($request->get_route_param('slug')) ;
     }
 }
