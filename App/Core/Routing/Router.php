@@ -28,6 +28,7 @@ class Router{
         }
         die() ;
     }
+    
     #find current route in routes
     public function findRout(Request $request){
         foreach($this->routes as $route){
@@ -40,6 +41,25 @@ class Router{
         }
         return null ;
     }
+
+    #regex route for example / post/{slog} = > post/145
+    public function  regex_matched($route){
+        global $request ;
+        $pattern = "/^" . str_replace(['/','{','}'],['\/','(?<','>[-%\w]+)'],$route['uri']) . "$/" ;
+        $result = preg_match($pattern,$this->request->uri(),$matches) ;
+        if (!$result) {
+            return false ;
+        }
+        #integer | staring
+        foreach($matches as $key => $values){
+            if (!is_int($key)) {
+                $request->add_route_param($key,$values);
+            }
+        }
+        return true ;
+    }
+
+    
     #error 404
     public function dispatch404(){
         #header 404
@@ -47,17 +67,7 @@ class Router{
         view('errors.404') ;
         #include file 404
     } 
-    #router run
-    public function run(){
-        #405 : invalid request method
-
-        #404 : uri not exist
-        if (is_null($this->current_route)) {
-            $this->dispatch404();
-        }
-        $this->dispatch($this->current_route);
-
-    }
+    
 
     private function dispatch($route){
         $action = $route['action'] ?? null;
@@ -88,20 +98,15 @@ class Router{
             $controller->$method() ;
         }
     }
-    #regex route for example / post/{slog} = > post/145
-    public function  regex_matched($route){
-        global $request ;
-        $pattern = "/^" . str_replace(['/','{','}'],['\/','(?<','>[-%\w]+)'],$route['uri']) . "$/" ;
-        $result = preg_match($pattern,$this->request->uri(),$matches) ;
-        if (!$result) {
-            return false ;
+
+    #router run
+    public function run(){
+        #405 : invalid request method
+
+        #404 : uri not exist
+        if (is_null($this->current_route)) {
+            $this->dispatch404();
         }
-        #integer | staring
-        foreach($matches as $key => $values){
-            if (!is_integer($key)) {
-                $request->add_route_param($key,$values);
-            }
-        }
-        return true ;
+        $this->dispatch($this->current_route);
     }
 } 

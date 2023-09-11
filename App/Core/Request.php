@@ -19,7 +19,12 @@ class Request{
         $this->params = $_REQUEST ;
         $this->uri = strtok($_SERVER['REQUEST_URI'],'?') ;
     }
-
+    public function add_route_param($key,$values){
+        $this->route_params[$key] = $values ;
+    }
+    public function get_route_param($key){
+        $this->route_params[$key] ;
+    }
     public function params(){
         return $this->params ;
     }
@@ -35,11 +40,6 @@ class Request{
     public function uri(){
         return $this->uri ;
     }
-    public function add_route_param($key,$values){
-        $this->route_params[$key] = $values ;
-    }
-    public function get_route_param($key){
-        $this->route_params[$key] ;
-    }
+    
 
 }
