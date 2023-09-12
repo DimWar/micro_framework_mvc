@@ -1,14 +1,20 @@
 <?php
+use App\Core\Routing\Route ;
+use App\Core\Routing\Router;
 
-use App\Core\Router ;
 #INITALE FILE
 require 'bootstrap/init.php' ;
 
 
 
-#front conroller router
 $router = new Router() ;
-$router -> run() ;
+$router->run() ;
+
+
+
+
+
+
 
 
 

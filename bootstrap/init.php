@@ -9,5 +9,9 @@ require BASE_PATH . '/vendor/autoload.php' ;
 $dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
 $dotenv->load();
 
+#REQUEST GLOBAL
+$request = new \App\Core\Request() ;
+
 #HELPERS FUNCTION
 require BASE_PATH . 'helpers/helpers.php' ;
+require BASE_PATH . 'routes/targets.php' ;
