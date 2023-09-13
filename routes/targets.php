@@ -17,7 +17,7 @@ Route::get('/users/list','UserController@list',[BlockFirefox::class]) ;
 // Route::get('/panel','PostController@single',Auth::class) ;
 
 Route::get('/post/{slug}','PostController@single') ;
-// Route::get('/post/{slug}/comment/{comment_id}','PostController@single') ;
+Route::get('/post/{slug}/comment/{cid}','PostController@comment') ;
 
 
 

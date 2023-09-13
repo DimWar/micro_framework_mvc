@@ -5,7 +5,13 @@ class PostController {
     public function single(){
         #model
         global $request ;
-        nice_dump($request->get_route_param('slug')) ;
-        echo 'kos' ;
+        $slug = $request->get_route_param('slug') ;
+        echo 'slug' ;
+    }
+    public function comment(){
+        #model
+        global $request ;
+        $cid = $request->get_route_param('cid') ;
+        echo 'comment' ;
     }
 }
