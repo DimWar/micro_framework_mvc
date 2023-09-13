@@ -23,7 +23,7 @@ class Request{
         $this->route_params[$key] = $values ;
     }
     public function get_route_param($key){
-        $this->route_params[$key] ;
+        echo $this->route_params[$key] ;
     }
     public function params(){
         return $this->params ;

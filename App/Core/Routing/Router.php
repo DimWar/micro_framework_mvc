@@ -14,23 +14,21 @@ class Router{
     public function __construct(){
         $this->request = new Request();
         $this->routes = Route::routes();
-        $this->current_route = $this->findRout($this->request) ?? null;
+        $this->current_route = $this->findRoute($this->request) ?? null;
         #run middleware
         $this->run_route_middleware() ;
     }
     #middleware
     private function run_route_middleware(){
         $middleware = $this->current_route['middleware'] ;
-        die() ;
         foreach ($middleware as $middleware_class) {
             $middleware_obj = new $middleware_class ;
             $middleware_obj->handel(); 
         }
-        die() ;
     }
     
     #find current route in routes
-    public function findRout(Request $request){
+    public function findRoute(Request $request){ 
         foreach($this->routes as $route){
             if(!in_array($request->method(),$route['methods'])){ // && $request->uri() == $route['uri']
                 return false ;
@@ -65,7 +63,6 @@ class Router{
         #header 404
         header('HTTP/1.0 404 Not Found');
         view('errors.404') ;
-        #include file 404
     } 
     
 
