@@ -9,7 +9,6 @@ class Request{
     private $ip ;
     private $uri ;
     private $browsAgant;
-
     public function __construct()
     {
         $this->browsAgant = $_SERVER['HTTP_USER_AGENT'];
@@ -19,12 +18,15 @@ class Request{
         $this->params = $_REQUEST ;
         $this->uri = strtok($_SERVER['REQUEST_URI'],'?') ;
     }
+    #add dynamic regex route to request 
     public function add_route_param($key,$values){
         $this->route_params[$key] = $values ;
     }
+    #print dynamic regex route in request 
     public function get_route_param($key){
         return $this->route_params[$key] ;
     }
+    #add dynamic regexs route in request 
     public function get_route_params($key){
         return $this->route_params ;
     }

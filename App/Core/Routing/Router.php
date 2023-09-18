@@ -26,11 +26,10 @@ class Router{
             $middleware_obj->handel(); 
         }
     }
-    
     #find current route in routes
     public function findRoute(Request $request){ 
         foreach($this->routes as $route){
-            if(!in_array($request->method(),$route['methods'])){ // && $request->uri() == $route['uri']
+            if(!in_array($request->method(),$route['methods'])){
                 return false ;
             }
             if ($this->regex_matched($route)) {
@@ -39,7 +38,6 @@ class Router{
         }
         return null ;
     }
-
     #regex route for example / post/{slog} = > post/145
     public function  regex_matched($route){
         global $request ;
@@ -48,7 +46,7 @@ class Router{
         if (!$result) {
             return false ;
         }
-        #integer | staring
+        #integer | staring 
         foreach($matches as $key => $values){
             if (!is_int($key)) {
                 $request->add_route_param($key,$values);
@@ -56,16 +54,14 @@ class Router{
         }
         return true ;
     }
-
-    
-    #error 404
+    #send to error 404 page
     public function dispatch404(){
         #header 404
         header('HTTP/1.0 404 Not Found');
         view('errors.404') ;
     } 
     
-
+    #send to target page
     private function dispatch($route){
         $action = $route['action'] ?? null;
 
