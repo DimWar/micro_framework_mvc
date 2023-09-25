@@ -2,24 +2,25 @@
 
 namespace App\Models\Contracts ;
 
-use PDOException;
 use Medoo\Medoo;
+use PDOException;
+
 
 class MysqlBaseModel extends BaseModel{
    
-    protected function __construct()
-    {
-       
+    public function __construct()
+    {  
         try { 
             #personal connection 
             //$this->connection = new \PDO("mysql:dbname={$_ENV['DB_NAME']};host={$_ENV['DB_HOST']}",$_ENV['DB_USER'],$_ENV['DB_PASS']);    
+            
             #midoo connection
-            $database = new Medoo([
+            $this->connection = new Medoo([
                 // [required]
                 'type' => 'mysql',
                 'host' => $_ENV['DB_HOST'],
                 'database' => $_ENV['DB_NAME'],
-                'username' => $_ENV['DB_ROOT'],
+                'username' => $_ENV['DB_USER'],
                 'password' => $_ENV['DB_PASS'],
             
                 // [optional]
@@ -53,8 +54,8 @@ class MysqlBaseModel extends BaseModel{
 
     #create - insert
     public function create(array $data):int {
-
-        return 1;
+        $this->connection->insert($this->table,$data);
+        return $this->connection->id();
     }
 
     #read - select | single record and multiple record
