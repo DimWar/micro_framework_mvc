@@ -13,18 +13,17 @@ class JsonBaseModel extends BaseModel{
     }
 
     private function read_table(){
-        $table_data = json_decode(file_get_contents($this->table_filePath)) ;
-        return $table_data ;
+            $table_data = json_decode(file_get_contents($this->table_filePath)) ;
+            return $table_data ;
     }
-
     private function write_json(array $data){
         $data_json = json_encode($data) ;
         file_put_contents($this->table_filePath,$data_json) ;
     }
-
+    
     #create - insert   
     public function create(array $data):int {
-        $read_data = $this->read_table($data);
+        $table_data = $this->read_table($data);
         $table_data[] = $data ;
         $this->write_json($table_data);
         return 1;
@@ -32,7 +31,13 @@ class JsonBaseModel extends BaseModel{
 
     #read - select | single record and multiple record
     public function find($id):object {
-        return (object)[] ;
+        $table_data = $this->read_table();
+        foreach ($table_data as $row) {
+            if($row->{$this->primaryKey} == $id){
+                return $row ;
+            }
+        }
+        return null ;
     }
 
     public function get(array $coluemns,array $where):array {
