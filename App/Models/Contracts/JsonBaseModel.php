@@ -39,7 +39,9 @@ class JsonBaseModel extends BaseModel{
         }
         return null ;
     }
-
+    public function getAll():array {
+        return $this->read_table();
+    }
     public function get(array $coluemns,array $where):array {
         return [] ;
     }
