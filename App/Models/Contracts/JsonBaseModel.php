@@ -4,18 +4,29 @@ namespace App\Models\Contracts ;
 
 class JsonBaseModel extends BaseModel{
     private $db_folder ;
+    private $table_filePath ;
+
     public function __construct()
     {
         $this->db_folder = BASE_PATH . '/storage/jsondb';
+        $this->table_filePath = $this->db_folder . '/' . $this->table . '.json';
     }
-    #create - insert
+
+    private function read_table(){
+        $table_data = json_decode(file_get_contents($this->table_filePath)) ;
+        return $table_data ;
+    }
+
+    private function write_json(array $data){
+        $data_json = json_encode($data) ;
+        file_put_contents($this->table_filePath,$data_json) ;
+    }
+
+    #create - insert   
     public function create(array $data):int {
-        $table_filePath = $this->db_folder . '/' . $this->table . '.json';
-        $table_data = json_decode(file_get_contents($table_filePath)) ;
+        $read_data = $this->read_table($data);
         $table_data[] = $data ;
-        $table_data_json = json_encode($table_data) ;
-        file_put_contents($table_filePath,$table_data_json) ;
-        nice_dump($table_data) ;
+        $this->write_json($table_data);
         return 1;
     }
 
