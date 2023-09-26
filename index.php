@@ -29,6 +29,10 @@ require 'bootstrap/init.php' ;
 // $newUserSql = new UserSql ;
 // $result = $newUserSql->create($arr) ;   
 
+    #find in mysql
+$newUserSql = new UserSql ;
+$result = $newUserSql->find(55) ;
+var_dump($result) ;  
     #Router------------------------------------------------------
 // $router = new Router() ;
 // $router->run() ;

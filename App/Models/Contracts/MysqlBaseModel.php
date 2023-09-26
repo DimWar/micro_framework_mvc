@@ -52,15 +52,17 @@ class MysqlBaseModel extends BaseModel{
         }                
     }
 
-    #create - insert
+    #create - insert by miroo
     public function create(array $data):int {
         $this->connection->insert($this->table,$data);
         return $this->connection->id();
     }
 
-    #read - select | single record and multiple record
+    #read - select | single record and multiple record by miroo
     public function find($id):object {
-        return (object)[] ;
+        $record = $this->connection->get($this->table,'*',[$this->primaryKey=>$id]);
+        return (object)$record ;
+        
     }
 
     public function get(array $coluemns,array $where):array {
